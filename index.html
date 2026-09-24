@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Indie Gems — Hand-curated products by independent developers | 独立开发者作品收录</title>
+<meta name="description" content="A hand-curated, free directory of apps, games, dev tools and communities built by independent developers and small teams worldwide. Submit your own product for free. 独立开发者作品收录站，收录全球 solo 开发者与小团队的精品作品，可免费申请收录。">
+<link rel="canonical" href="https://tliens.github.io/indie-gems/">
+<link rel="alternate" hreflang="en" href="https://tliens.github.io/indie-gems/">
+<link rel="alternate" hreflang="zh" href="https://tliens.github.io/indie-gems/?lang=zh">
+<link rel="alternate" hreflang="x-default" href="https://tliens.github.io/indie-gems/">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Indie Gems">
+<meta property="og:title" content="Indie Gems — Products made by independent developers">
+<meta property="og:description" content="A hand-curated directory of apps, games, dev tools and communities built by solo developers and small teams. Free to submit.">
+<meta property="og:url" content="https://tliens.github.io/indie-gems/">
+<meta property="og:image" content="https://tliens.github.io/indie-gems/og-image.png">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="zh_CN">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Indie Gems — Products made by independent developers">
+<meta name="twitter:description" content="A hand-curated directory of apps, games, dev tools and communities built by solo developers and small teams. Free to submit.">
+<meta name="twitter:image" content="https://tliens.github.io/indie-gems/og-image.png">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+ {"@type":"WebSite","name":"Indie Gems","url":"https://tliens.github.io/indie-gems/",
+  "description":"A hand-curated directory of products built by independent developers and small teams worldwide. Free to submit.",
+  "inLanguage":["en","zh-CN"],"publisher":{"@type":"Person","name":"Tliens"}},
+ {"@type":"FAQPage","mainEntity":[
+  {"@type":"Question","name":"What counts as an independent developer product?",
+   "acceptedAnswer":{"@type":"Answer","text":"Products built primarily by one to three people, self-funded and independent of big companies. Both full-time indie hackers and side-project builders are welcome."}},
+  {"@type":"Question","name":"Does listing cost anything?",
+   "acceptedAnswer":{"@type":"Answer","text":"No. Listing on Indie Gems is completely free — no paid placement, no affiliate links, and editorial order is not for sale."}},
+  {"@type":"Question","name":"How do I submit my product?",
+   "acceptedAnswer":{"@type":"Answer","text":"Email tliens@163.com with your product name, link, one-line intro, maker and pricing model. The Open email template button on the site fills this in for you. Most reviews take a few days."}},
+  {"@type":"Question","name":"Can I update or remove my listing?",
+   "acceptedAnswer":{"@type":"Answer","text":"Yes — email the same address with the change. We can update the description, link, or pricing, and honor removal requests at any time."}},
+  {"@type":"Question","name":"How often is the directory updated?",
+   "acceptedAnswer":{"@type":"Answer","text":"New listings are added as they are reviewed, roughly weekly. The product count and cards on the front page update with each release."}}
+ ]}
+]}
+</script>
+<style>
+:root{
+  --bg:#f7f7fb; --card:#ffffff; --card2:#f2f1fd; --text:#191b22; --muted:#697080; --line:#e6e7ee;
+  --accent:#5b5bd6; --accent-tx:#ffffff; --accent-soft:rgba(91,91,214,.10);
+  --free-bg:rgba(22,163,74,.12); --free-tx:#15803d;
+  --freemium-bg:rgba(37,99,235,.12); --freemium-tx:#1d4ed8;
+  --paid-bg:rgba(217,119,6,.14); --paid-tx:#b45309;
+  --oss-bg:rgba(147,51,234,.12); --oss-tx:#7e22ce;
+  --shadow:0 1px 2px rgba(15,17,26,.05),0 8px 24px rgba(15,17,26,.06);
+  --shadow-hover:0 2px 4px rgba(15,17,26,.06),0 14px 36px rgba(15,17,26,.12);
+}
+html[data-theme="dark"]{
+  --bg:#0e1013; --card:#161920; --card2:#1d1b33; --text:#e8eaf0; --muted:#9aa1ad; --line:#262b36;
+  --accent:#8a83f5; --accent-tx:#0e1013; --accent-soft:rgba(138,131,245,.14);
+  --free-bg:rgba(74,222,128,.14); --free-tx:#4ade80;
+  --freemium-bg:rgba(96,165,250,.14); --freemium-tx:#7cb8ff;
+  --paid-bg:rgba(251,191,36,.14); --paid-tx:#fbbf24;
+  --oss-bg:rgba(192,132,252,.15); --oss-tx:#d8b4fe;
+  --shadow:0 1px 2px rgba(0,0,0,.3); --shadow-hover:0 2px 6px rgba(0,0,0,.4),0 16px 40px rgba(0,0,0,.45);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text);line-height:1.6;transition:background .25s,color .25s}
+html.lang-zh .tl-en{display:none}
+html:not(.lang-zh) .tl-zh{display:none}
+a{color:inherit}
+.wrap{max-width:1100px;margin:0 auto;padding:0 20px}
+/* header */
+header{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.hd{display:flex;align-items:center;gap:14px;height:60px}
+.brand{display:flex;align-items:center;gap:9px;font-weight:800;font-size:18px;text-decoration:none;letter-spacing:-.2px}
+.brand .gem{font-size:21px}
+nav.main{display:flex;gap:4px;margin-left:6px}
+nav.main a{padding:7px 11px;border-radius:9px;text-decoration:none;color:var(--muted);font-size:14.5px;font-weight:500}
+nav.main a:hover{color:var(--text);background:var(--accent-soft)}
+.hd-ctl{margin-left:auto;display:flex;gap:8px;align-items:center}
+.ctl{border:1px solid var(--line);background:var(--card);color:var(--text);border-radius:9px;padding:6px 11px;font-size:13.5px;font-weight:600;cursor:pointer;font-family:inherit}
+.ctl:hover{border-color:var(--accent)}
+/* hero */
+.hero{padding:72px 0 30px;text-align:center;background:
+ radial-gradient(600px 240px at 30% 0%,var(--accent-soft),transparent),
+ radial-gradient(600px 240px at 70% 0%,var(--accent-soft),transparent)}
+.kick{display:inline-block;font-size:12.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);background:var(--accent-soft);padding:5px 13px;border-radius:999px;margin-bottom:18px}
+h1{font-size:clamp(2rem,5.2vw,3.1rem);line-height:1.15;letter-spacing:-.02em;font-weight:800;max-width:780px;margin:0 auto}
+h1 .grad{background:linear-gradient(92deg,#5b5bd6,#9d5bd6 55%,#d65bb0);-webkit-background-clip:text;background-clip:text;color:transparent}
+html[data-theme="dark"] h1 .grad{background:linear-gradient(92deg,#8a83f5,#c084fc 55%,#f472b6);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero-sub{max-width:640px;margin:18px auto 0;color:var(--muted);font-size:17px}
+.stats{display:flex;justify-content:center;gap:38px;margin:30px 0 26px;flex-wrap:wrap}
+.stat b{display:block;font-size:27px;font-weight:800;letter-spacing:-.02em}
+.stat span{font-size:13px;color:var(--muted);font-weight:500}
+.cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:8px}
+.btn{display:inline-block;padding:11px 22px;border-radius:11px;font-weight:700;font-size:15px;text-decoration:none;cursor:pointer;border:none;font-family:inherit}
+.btn-pri{background:linear-gradient(92deg,#5b5bd6,#7c5bd6);color:#fff;box-shadow:0 6px 18px rgba(91,91,214,.35)}
+html[data-theme="dark"] .btn-pri{background:linear-gradient(92deg,#6d66e8,#8a83f5);color:#fff}
+.btn-pri:hover{transform:translateY(-1px);box-shadow:0 8px 22px rgba(91,91,214,.45)}
+.btn-gho{background:var(--card);color:var(--text);border:1px solid var(--line)}
+.btn-gho:hover{border-color:var(--accent)}
+/* toolbar */
+#products{padding:36px 0 10px}
+.sec-title{font-size:26px;font-weight:800;letter-spacing:-.02em;margin-bottom:4px}
+.sec-sub{color:var(--muted);font-size:15px;margin-bottom:20px}
+.toolbar{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
+.search{flex:1;min-width:220px;position:relative}
+.search input{width:100%;padding:11px 14px 11px 38px;border-radius:11px;border:1px solid var(--line);background:var(--card);color:var(--text);font-size:15px;font-family:inherit;outline:none}
+.search input:focus{border-color:var(--accent)}
+.search::before{content:"🔍";position:absolute;left:12px;top:50%;transform:translateY(-50%);font-size:14px;opacity:.65}
+.toolbar select{padding:10px 12px;border-radius:11px;border:1px solid var(--line);background:var(--card);color:var(--text);font-size:14px;font-family:inherit;cursor:pointer;outline:none}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+.chips button{padding:7px 14px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--muted);font-size:13.5px;font-weight:600;cursor:pointer;font-family:inherit}
+.chips button:hover{border-color:var(--accent);color:var(--text)}
+.chips button.on{background:var(--accent);border-color:var(--accent);color:#fff}
+.count-line{font-size:13.5px;color:var(--muted);margin-bottom:14px}
+/* cards */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:16px;padding-bottom:30px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:15px;padding:18px;display:flex;flex-direction:column;gap:8px;transition:transform .18s,box-shadow .18s,border-color .18s}
+.card:hover{transform:translateY(-3px);box-shadow:var(--shadow-hover);border-color:var(--accent)}
+.card.hidden{display:none}
+.card-head{display:flex;justify-content:space-between;align-items:flex-start}
+.tile{width:46px;height:46px;border-radius:12px;background:var(--card2);display:flex;align-items:center;justify-content:center;font-size:25px}
+.badge{font-size:11.5px;font-weight:700;padding:3px 9px;border-radius:999px;white-space:nowrap}
+.b-free{background:var(--free-bg);color:var(--free-tx)}
+.b-freemium{background:var(--freemium-bg);color:var(--freemium-tx)}
+.b-paid{background:var(--paid-bg);color:var(--paid-tx)}
+.b-oss{background:var(--oss-bg);color:var(--oss-tx)}
+.card-name{font-size:16.5px;font-weight:700;letter-spacing:-.01em}
+.card-maker{font-size:12.5px;color:var(--muted);margin-top:-6px}
+.card-tag{font-size:13.5px;color:var(--muted);line-height:1.55;flex:1}
+.card-foot{display:flex;align-items:center;gap:8px;margin-top:4px;flex-wrap:wrap}
+.chip{font-size:11.5px;font-weight:600;color:var(--muted);border:1px solid var(--line);padding:3px 9px;border-radius:999px}
+.plat{font-size:11.5px;color:var(--muted);font-weight:500}
+.visit{margin-left:auto;font-size:13px;font-weight:700;color:var(--accent);text-decoration:none;white-space:nowrap}
+.visit:hover{text-decoration:underline}
+.empty{display:none;text-align:center;padding:46px 0 60px;color:var(--muted)}
+.empty.show{display:block}
+.empty p{margin-bottom:14px;font-size:15px}
+/* submit */
+#submit{padding:56px 0 20px}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:34px;display:grid;grid-template-columns:1.15fr 1fr;gap:36px;box-shadow:var(--shadow)}
+.panel h2{font-size:24px;font-weight:800;letter-spacing:-.02em;margin-bottom:6px}
+.panel .lead{color:var(--muted);font-size:15px;margin-bottom:18px}
+.panel h3{font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:10px}
+.crit{list-style:none;display:flex;flex-direction:column;gap:9px;margin-bottom:22px}
+.crit li{font-size:14.5px;padding-left:26px;position:relative}
+.crit li::before{content:"✅";position:absolute;left:0;font-size:14px}
+.mail{display:flex;align-items:center;gap:10px;background:var(--bg);border:1px dashed var(--line);border-radius:12px;padding:13px 16px;margin-bottom:16px;font-weight:700;font-size:16px;color:var(--accent);flex-wrap:wrap}
+.mail small{font-weight:500;color:var(--muted);font-size:12.5px;width:100%}
+.mbtns{display:flex;gap:10px;flex-wrap:wrap}
+.note{font-size:13px;color:var(--muted);margin-top:14px}
+/* faq */
+#faq{padding:56px 0 30px;max-width:780px;margin:0 auto}
+#faq .wrap{padding:0}
+details{border-bottom:1px solid var(--line)}
+summary{cursor:pointer;font-weight:700;font-size:15.5px;padding:16px 4px;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:12px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font-size:20px;color:var(--muted);font-weight:400;transition:transform .2s}
+details[open] summary::after{transform:rotate(45deg)}
+details p{color:var(--muted);font-size:14.5px;padding:0 4px 18px;max-width:680px}
+/* footer */
+footer{border-top:1px solid var(--line);margin-top:30px;padding:30px 0 40px;color:var(--muted);font-size:13.5px}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center}
+footer a{color:var(--accent);text-decoration:none}
+footer a:hover{text-decoration:underline}
+@media(max-width:760px){
+  nav.main{display:none}
+  .panel{grid-template-columns:1fr;padding:26px}
+  .hero{padding:52px 0 24px}
+  .stats{gap:26px}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap hd">
+    <a class="brand" href="#"><span class="gem">💎</span>Indie Gems</a>
+    <nav class="main">
+      <a href="#products"><span data-i18n="nav_products">Products</span></a>
+      <a href="#submit"><span data-i18n="nav_submit">Submit</span></a>
+      <a href="#faq"><span data-i18n="nav_faq">FAQ</span></a>
+    </nav>
+    <div class="hd-ctl">
+      <button class="ctl" id="themeBtn" aria-label="Toggle theme">🖥️</button>
+      <button class="ctl" id="langBtn">中文</button>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <span class="kick"><span data-i18n="hero_kick">Hand-curated · Updated weekly</span></span>
+    <h1><span data-i18n="hero_title_a">Great products, made by </span><span class="grad" data-i18n="hero_title_b">independent developers</span></h1>
+    <p class="hero-sub" data-i18n="hero_sub">Indie Gems is a free, hand-curated directory of apps, games, dev tools and communities built by solo developers and small teams around the world. No big-company backing — just craft.</p>
+    <div class="stats">
+      <div class="stat"><b id="statProducts">25</b><span data-i18n="stat_products">Products</span></div>
+      <div class="stat"><b id="statMakers">21</b><span data-i18n="stat_makers">Makers</span></div>
+      <div class="stat"><b>$0</b><span data-i18n="stat_cost">To get listed</span></div>
+    </div>
+    <div class="cta">
+      <a class="btn btn-pri" href="#products"><span data-i18n="cta_browse">Browse products</span></a>
+      <a class="btn btn-gho" href="#submit"><span data-i18n="cta_submit">Submit yours — free</span></a>
+    </div>
+  </div>
+</section>
+
+<section id="products">
+  <div class="wrap">
+    <h2 class="sec-title" data-i18n="dir_title">The directory</h2>
+    <p class="sec-sub" data-i18n="dir_sub">Every entry is hand-picked. Order is editorial, not sponsored.</p>
+    <div class="toolbar">
+      <div class="search"><input id="q" type="search" data-i18n-ph="search_ph" placeholder="Search products, makers…" aria-label="Search"></div>
+      <select id="fPlat" aria-label="Platform filter">
+        <option value="all" data-i18n="plat_all">All platforms</option>
+        <option value="web" data-i18n="plat_web">Web</option>
+        <option value="ios" data-i18n="plat_ios">iOS</option>
+        <option value="mac" data-i18n="plat_mac">macOS</option>
+        <option value="multi" data-i18n="plat_multi">Multi-platform</option>
+      </select>
+      <select id="fPrice" aria-label="Pricing filter">
+        <option value="all" data-i18n="price_all">All pricing</option>
+        <option value="free" data-i18n="price_free">Free</option>
+        <option value="freemium" data-i18n="price_freemium">Freemium</option>
+        <option value="paid" data-i18n="price_paid">Paid</option>
+        <option value="oss" data-i18n="price_oss">Open Source</option>
+      </select>
+    </div>
+    <div class="chips" id="chips">
+      <button class="on" data-cat="all"><span data-i18n="cat_all">All</span></button>
+      <button data-cat="apps"><span data-i18n="cat_apps">Apps &amp; Tools</span></button>
+      <button data-cat="creative"><span data-i18n="cat_creative">Creative &amp; Design</span></button>
+      <button data-cat="dev"><span data-i18n="cat_dev">Developer Tools</span></button>
+      <button data-cat="games"><span data-i18n="cat_games">Games</span></button>
+      <button data-cat="community"><span data-i18n="cat_community">Community &amp; Media</span></button>
+    </div>
+    <p class="count-line" id="count"></p>
+    <div class="grid" id="grid">
+<!-- CARDS:START -->
+<article class="card" data-cat="creative" data-plat="web" data-price="free" data-maker="Ivan Kutskir">
+  <div class="card-head">
+    <span class="tile" aria-hidden="true">🎨</span>
+    <span class="badge b-free"><span class="tl-en">Free</span><span class="tl-zh">免费</span></span>
+  </div>
+  <h3 class="card-name">PhotoPea</h3>
+  <p class="card-maker"><span class="tl-en">by </span><span class="tl-zh">作者 </span>Ivan Kutskir</p>
+  <p class="card-tag"><span class="tl-en">A full-featured photo editor that runs entirely in your browser — opens PSD files, free.</span><span class="tl-zh">完全在浏览器里运行的修图工具，可直接打开 PSD 文件，免费。</span></p>
+  <div class="card-foot">
+    <span class="chip"><span class="tl-en">Creative & Design</span><span class="tl-zh">创作与设计</span></span>
+    <span class="plat"><span class="tl-en">Web</span><span class="tl-zh">网页</span></span>
+    <a class="visit" href="https://www.photopea.com" target="_blank" rel="noopener"><span class="tl-en">Visit ↗</span><span class="tl-zh">访问 ↗</span></a>
+  </div>
+</article>
+<article class="card" data-cat="creative" data-plat="web" data-price="freemium" data-maker="AJ">
+  <div class="card-head">
+    <span class="tile" aria-hidden="true">📄</span>
+    <span class="badge b-freemium"><span class="tl-en">Freemium</span><span class="tl-zh">免费+付费</span></span>
+  </div>
+  <h3 class="card-name">Carrd</h3>
+  <p class="card-maker"><span class="tl-en">by </span><span class="tl-zh">作者 </span>AJ</p>
+  <p class="card-tag"><span class="tl-en">Build one-page sites for anything in minutes — free to start, beloved by makers.</span><span class="tl-zh">几分钟做出一个精美单页网站，独立开发者的名片神器。</span></p>
+  <div class="card-foot">
+    <span class="chip"><span class="tl-en">Creative & Design</span><span class="tl-zh">创作与设计</span></span>
+    <span class="plat"><span class="tl-en">Web</span><span class="tl-zh">网页</span></span>
+    <a class="visit" href="https://carrd.co" target="_blank" rel="noopener"><span class="tl-en">Visit ↗</span><span class="tl-zh">访问 ↗</span></a>
+  </div>
+</article>
+<article class="card" data-cat="creative" data-plat="multi" data-price="paid" data-maker="iA">
+  <div class="card-head">
+    <span class="tile" aria-hidden="true">✍️</span>
+    <span class="badge b-paid"><span class="tl-en">Paid</span><span class="tl-zh">付费</span></span>
+  </div>
+  <h3 class="card-name">iA Writer</h3>
+  <p class="card-maker"><span class="tl-en">by </span><span class="tl-zh">作者 </span>iA</p>
+  <p class="card-tag"><span class="tl-en">The minimalist writing app that keeps you focused on the words.</span><span class="tl-zh">极简主义写作应用，让你专注于文字本身。</span></p>
+  <div class="card-foot">
+    <span class="chip"><span class="tl-en">Creative & Design</span><span class="tl-zh">创作与设计</span></span>
+    <span class="plat"><span class="tl-en">Multi-platform</span><span class="tl-zh">跨平台</span></span>
+    <a class="visit" href="https://ia.net/writer" target="_blank" rel="noopener"><span class="tl-en">Visit ↗</span><span class="tl-zh">访问 ↗</span></a>
+  </div>
+</article>
+<article class="card" data-cat="creative" data-plat="mac" data-price="free" data-maker="">
+  <div class="card-head">
+    <span class="tile" aria-hidden="true">📸</span>
+    <span class="badge b-free"><span class="tl-en">Free</span><span class="tl-zh">免费</span></span>
+  </div>
+  <h3 class="card-name">Shottr</h3>
+  <p class="card-tag"><span class="tl-en">A tiny, blazing-fast screenshot tool for macOS — annotate, stitch, measure.</span><span class="tl-zh">小巧极速的 macOS 截图工具：标注、长截图、取色、测量。</span></p>
+  <div class="card-foot">
+    <span class="chip"><span class="tl-en">Creative & Design</span><span class="tl-zh">创作与设计</span></span>
+    <span class="plat"><span class="tl-en">macOS</span><span class="tl-zh">macOS</span></span>
+    <a class="visit" href="https://shottr.cc" target="_blank" rel="noopener"><span class="tl-en">Visit ↗</span><span class="tl-zh">访问 ↗</span></a>
+  </div>
+</article>
+<article class="card" data-cat="apps" data-plat="ios" data-price="freemium" data-maker="Marco Arment">
+  <div class="card-head">
+    <span class="tile" aria-hidden="true">🎧</span>
+    <span class="badge b-freemium"><span class="tl-en">Freemium</span><span class="tl-zh">免费+付费</span></span>
+  </div>
+  <h3 class="card-name">Overcast</h3>
+  <p class="card-maker"><span class="tl-en">by </span><span class="tl-zh">作者 </span>Marco Arment</p>
+  <p class="card-tag"><span class="tl-en">A powerful yet simple podcast player, free to listen.</span><span class="tl-zh">简洁强大的播客客户端，免费收听。</span></p>
+  <div class="card-foot">
+    <span class="chip"><span class="tl-en">Apps & Tools</span><span class="tl-zh">应用与工具</span></span>
+    <span class="plat"><span class="tl-en">iOS</span><span class="tl-zh">iOS</span></span>
+    <a class="visit" href="https://overcast.fm" target="_blank" rel="noopener"><span class="tl-en">Visit ↗</span><span class="tl-zh">访问 ↗</span></a>
+  </div>
+</article>
+<article class="card" data-cat="apps" data-plat="web" data-price="paid" data-maker="Maciej Cegłowski">
+  <div class="card-head">
+    <span class="tile" aria-hidden="true">📌</span>
+    <span class="badge b-paid"><span class="tl-en">Paid</span><span class="tl-zh">付费</span></span>
+  </div>
+  <h3 class="card-name">Pinboard</h3>
+  <p class="card-maker"><span class="tl-en">by </span><span class="tl-zh">作者 </span>Maciej Cegłowski</p>
+  <p class="card-tag"><span class="tl-en">No-nonsense bookmarking for the web — fast, archived, yours.</span><span class="tl-zh">朴实无华的网页书签服务：快、可存档、属于你自己。</span></p>
+  <div class="card-foot">
+    <span class="chip"><span class="tl-en">Apps & Tools</span><span class="tl-zh">应用与工具</span></span>
+    <span class="plat"><span class="tl-en">Web</span><span class="tl-zh">网页</span></span>
+    <a class="visit" href="https://pinboard.in" target="_blank" rel="noopener"><span class="tl-en">Visit ↗</span><span class="tl-zh">访问 ↗</span></a>
+  </div>
+</article>
+<article class="card" data-cat="apps" data-plat="ios" data-price="freemium" data-maker="Ryan Jones">
+  <div class="card-head">
+    <span class="tile" aria-hidden="true">✈️</span>
+    <span class="badge b-freemium"><span class="tl-en">Freemium</span><span class="tl-zh">免费+付费</span></span>
+  </div>
+  <h3 class="card-name">Flighty</h3>
+  <p class="card-maker"><span class="tl-en">by </span><span class="tl-zh">作者 </span>Ryan Jones</p>
+  <p class="card-tag"><span class="tl-en">Live flight tracking with delay predictions, done beautifully.</span><span class="tl-zh">实时航班追踪 App，延迟预测做得格外漂亮。</span></p>
+  <div class="card-foot">
+    <span class="chip"><span class="tl-en">Apps & Tools</span><span class="tl-zh">应用与工具</span></span>
+    <span class="plat"><span class="tl-en">iOS</span><span class="tl-zh">iOS</span></span>
+    <a class="visit" href="https://flighty.com" target="_blank" rel="noopener"><span class="tl-en">Visit ↗</span><span class="tl-zh">访问 ↗</span></a>
+  </div>
+</article>
+<article class="card" data-cat="apps" data-plat="mac" data-price="freemium" data-maker="Vero & Andrew">
+  <div class="card-head">
+    <span class="tile" aria-hidden="true">🎩</span>
+    <span class="badge b-freemium"><span class="tl-en">Freemium</span><span class="tl-zh">免费+付费</span></span>
+  </div>
+  <h3 class="card-name">Alfred</h3>
+  <p class="card-maker"><span class="tl-en">by </span><span class="tl-zh">作者 </span>Vero & Andrew</p>
+  <p class="card-tag"><span class="tl-en">The legendary macOS launcher — search, automate and control everything.</span><span class="tl-zh">传奇级 macOS 效率启动器：搜索、自动化、掌控一切。</span></p>
+  <div class="card-foot">
+    <span class="chip"><span class="tl-en">Apps & Tools</span><span class="tl-zh">应用与工具</span></span>
+    <span class="plat"><span class="tl-en">macOS</span><span class="tl-zh">macOS</span></span>
+    <a class="visit" href="https://www.alfredapp.com" target="_blank" rel="noopener"><span class="tl-en">Visit ↗</span><span class="tl-zh">访问 ↗</span></a>
+  </div>
+</article>
+<article class="card" data-cat="apps" data-plat="mac" data-price="freemium" data-maker="ripperhe">
+  <div class="card-head">
+    <span class="tile" aria-hidden="true">🌐</span>
+    <span class="badge b-freemium"><span class="tl-en">Freemium</span><span class="tl-zh">免费+付费</span></span>
+  </div>
+  <h3 class="card-name">Bob</h3>
+  <p class="card-maker"><span class="tl-en">by </span><span class="tl-zh">作者 </span>ripperhe</p>
+  <p class="card-tag"><span class="tl-en">A macOS translation & OCR tool — word, screenshot and hotkey translation.</span><span class="tl-zh">macOS 翻译与 OCR 工具：划词、截图翻译一步到位。</span></p>
+  <div class="card-foot">
+    <span class="chip"><span class="tl-en">Apps & Tools</span><span class="tl-zh">应用与工具</span></span>
+    <span class="plat"><span class="tl-en">macOS</span><span class="tl-zh">macOS</span></span>
+    <a class="visit" href="https://bobtranslate.com" target="_blank" rel="noopener"><span class="tl-en">Visit ↗</span><span class="tl-zh">访问 ↗</span></a>
+  </div>
+</article>
+<article class="card" data-cat="apps" data-plat="ios mac" data-price="freemium" data-maker="Shiny Frog">
+  <div class="card-head">
+    <span class="tile" aria-hidden="true">🐻</span>
+    <span class="badge b-freemium"><span class="tl-en">Freemium</span><span class="tl-zh">免费+付费</span></span>
+  </div>
+  <h3 class="card-name">Bear</h3>
+  <p class="card-maker"><span class="tl-en">by </span><span class="tl-zh">作者 </span>Shiny Frog</p>
+  <p class="card-tag"><span class="tl-en">Beautiful, flexible writing and notes for iOS and macOS.</span><span class="tl-zh">iOS 与 macOS 上优雅灵活的写作笔记应用。</span></p>
+  <div class="card-foot">
+    <span class="chip"><span class="tl-en">Apps & Tools</span><span class="tl-zh">应用与工具</span></span>
+    <span class="plat"><span class="tl-en">iOS · macOS</span><span class="tl-zh">iOS · macOS</span></span>
+    <a class="visit" href="https://bear.app" target="_blank" rel="noopener"><span class="tl-en">Visit ↗</span><span class="tl-zh">访问 ↗</span></a>
+  </div>
+</article>
+<article class="card" data-cat="apps" data-plat="multi" data-price="freemium" data-maker="少楠 & lightory">
+  <div class="card-head">
+    <span class="tile" aria-hidden="true">💭</span>
+    <span class="badge b-freemium"><span class="tl-en">Freemium</span><span class="tl-zh">免费+付费</span></span>
+  </div>
+  <h3 class="card-name">flomo 浮墨笔记</h3>
+  <p class="card-maker"><span class="tl-en">by </span><span class="tl-zh">作者 </span>少楠 & lightory</p>
+  <p class="card-tag"><span class="tl-en">Card-note app that helps you capture and connect ideas bit by bit.</span><span class="tl-zh">卡片笔记应用：像发微博一样，持续记录你的想法。</span></p>
+  <div class="card-foot">
+    <span class="chip"><span class="tl-en">Apps & Tools</span><span class="tl-zh">应用与工具</span></span>
+    <span class="plat"><span class="tl-en">Multi-platform</span><span class="tl-zh">跨平台</span></span>
+    <a class="visit" href="https://flomoapp.com" target="_blank" rel="noopener"><span class="tl-en">Visit ↗</span><span class="tl-zh">访问 ↗</span></a>
+  </div>
+</article>
+<article class="card" data-cat="apps" data-plat="web" data-price="oss" data-maker="">
+  <div class="card-head">
+    <span class="tile" aria-hidden="true">🗒️</span>
+    <span class="badge b-oss"><span class="tl-en">Open Source</span><span class="tl-zh">开源</span></span>
+  </div>
+  <h3 class="card-name">Memos</h3>
+  <p class="card-tag"><span class="tl-en">An open-source, self-hosted note-taking service — your own flomo alternative.</span><span class="tl-zh">开源的自托管轻笔记服务，flomo 的开源替代品。</span></p>
+  <div class="card-foot">
+    <span class="chip"><span class="tl-en">Apps & Tools</span><span class="tl-zh">应用与工具</span></span>
+    <span class="plat"><span class="tl-en">Web</span><span class="tl-zh">网页</span></span>
+    <a class="visit" href="https://usememos.com" target="_blank" rel="noopener"><span class="tl-en">Visit ↗</span><span class="tl-zh">访问 ↗</span></a>
+  </div>
+</article>
+<article class="card" data-cat="apps" data-plat="multi" data-price="paid" data-maker="">
+  <div class="card-head">
+    <span class="tile" aria-hidden="true">📝</span>
+    <span class="badge b-paid"><span class="tl-en">Paid</span><span class="tl-zh">付费</span></span>
+  </div>
+  <h3 class="card-name">Typora</h3>
+  <p class="card-tag"><span class="tl-en">A seamless Markdown editor — live preview with zero distraction.</span><span class="tl-zh">所见即所得的 Markdown 编辑器，写作毫无割裂感。</span></p>
+  <div class="card-foot">
+    <span class="chip"><span class="tl-en">Apps & Tools</span><span class="tl-zh">应用与工具</span></span>
+    <span class="plat"><span class="tl-en">Multi-platform</span><span class="tl-zh">跨平台</span></span>
+    <a class="visit" href="https://typora.io" target="_blank" rel="noopener"><span class="tl-en">Visit ↗</span><span class="tl-zh">访问 ↗</span></a>
+  </div>
+</article>
+<article class="card" data-cat="apps" data-plat="web" data-price="freemium" data-maker="Kenshin Wang">
+  <div class="card-head">
+    <span class="tile" aria-hidden="true">📖</span>
+    <span class="badge b-freemium"><span class="tl-en">Freemium</span><span class="tl-zh">免费+付费</span></span>
+  </div>
+  <h3 class="card-name">简悦 SimpRead</h3>
+  <p class="card-maker"><span class="tl-en">by </span><span class="tl-zh">作者 </span>Kenshin Wang</p>
+  <p class="card-tag"><span class="tl-en">Immersive reading mode + read-later for Chrome, with Markdown & Kindle export.</span><span class="tl-zh">Chrome 沉浸式阅读扩展：稍后读、导出 Markdown / Kindle。</span></p>
+  <div class="card-foot">
+    <span class="chip"><span class="tl-en">Apps & Tools</span><span class="tl-zh">应用与工具</span></span>
+    <span class="plat"><span class="tl-en">Web</span><span class="tl-zh">网页</span></span>
+    <a class="visit" href="https://simpread.ksria.cn" target="_blank" rel="noopener"><span class="tl-en">Visit ↗</span><span class="tl-zh">访问 ↗</span></a>
+  </div>
+</article>
+<article class="card" data-cat="dev" data-plat="multi" data-price="paid" data-maker="Jon Skinner">
+  <div class="card-head">
+    <span class="tile" aria-hidden="true">⌨️</span>
+    <span class="badge b-paid"><span class="tl-en">Paid</span><span class="tl-zh">付费</span></span>
+  </div>
+  <h3 class="card-name">Sublime Text</h3>
+  <p class="card-maker"><span class="tl-en">by </span><span class="tl-zh">作者 </span>Jon Skinner</p>
+  <p class="card-tag"><span class="tl-en">A fast, refined cross-platform code editor, loved since 2008.</span><span class="tl-zh">流畅极快的跨平台代码编辑器，从 2008 年流行至今。</span></p>
+  <div class="card-foot">
+    <span class="chip"><span class="tl-en">Developer Tools</span><span class="tl-zh">开发者工具</span></span>
+    <span class="plat"><span class="tl-en">Multi-platform</span><span class="tl-zh">跨平台</span></span>
+    <a class="visit" href="https://www.sublimetext.com" target="_blank" rel="noopener"><span class="tl-en">Visit ↗</span><span class="tl-zh">访问 ↗</span></a>
+  </div>
+</article>
+<article class="card" data-cat="dev" data-plat="web" data-price="paid" data-maker="Jon Yongfook">
+  <div class="card-head">
+    <span class="tile" aria-hidden="true">🏷️</span>
+    <span class="badge b-paid"><span class="tl-en">Paid</span><span class="tl-zh">付费</span></span>
+  </div>
+  <h3 class="card-name">Bannerbear</h3>
+  <p class="card-maker"><span class="tl-en">by </span><span class="tl-zh">作者 </span>Jon Yongfook</p>
+  <p class="card-tag"><span class="tl-en">An API that auto-generates social images and banners from your data.</span><span class="tl-zh">用 API 自动生成社交配图和 Banner 的服务。</span></p>
+  <div class="card-foot">
+    <span class="chip"><span class="tl-en">Developer Tools</span><span class="tl-zh">开发者工具</span></span>
+    <span class="plat"><span class="tl-en">Web</span><span class="tl-zh">网页</span></span>
+    <a class="visit" href="https://www.bannerbear.com" target="_blank" rel="noopener"><span class="tl-en">Visit ↗</span><span class="tl-zh">访问 ↗</span></a>
+  </div>
+</article>
+<article class="card" data-cat="dev" data-plat="web" data-price="oss" data-maker="Uku & Marko">
+  <div class="card-head">
+    <span class="tile" aria-hidden="true">📊</span>
+    <span class="badge b-oss"><span class="tl-en">Open Source</span><span class="tl-zh">开源</span></span>
+  </div>
+  <h3 class="card-name">Plausible Analytics</h3>
+  <p class="card-maker"><span class="tl-en">by </span><span class="tl-zh">作者 </span>Uku & Marko</p>
+  <p class="card-tag"><span class="tl-en">Simple, privacy-friendly web analytics — open source, no cookies.</span><span class="tl-zh">简单、保护隐私的网站统计：开源、无 Cookie、轻量。</span></p>
+  <div class="card-foot">
+    <span class="chip"><span class="tl-en">Developer Tools</span><span class="tl-zh">开发者工具</span></span>
+    <span class="plat"><span class="tl-en">Web</span><span class="tl-zh">网页</span></span>
+    <a class="visit" href="https://plausible.io" target="_blank" rel="noopener"><span class="tl-en">Visit ↗</span><span class="tl-zh">访问 ↗</span></a>
+  </div>
+</article>
+<article class="card" data-cat="dev" data-plat="multi" data-price="oss" data-maker="Molunerfinn">
+  <div class="card-head">
+    <span class="tile" aria-hidden="true">📤</span>
+    <span class="badge b-oss"><span class="tl-en">Open Source</span><span class="tl-zh">开源</span></span>
+  </div>
+  <h3 class="card-name">PicGo</h3>
+  <p class="card-maker"><span class="tl-en">by </span><span class="tl-zh">作者 </span>Molunerfinn</p>
+  <p class="card-tag"><span class="tl-en">Upload pictures to your image bed, one drag away — open source.</span><span class="tl-zh">开源图床上传工具：拖一下，链接即得。</span></p>
+  <div class="card-foot">
+    <span class="chip"><span class="tl-en">Developer Tools</span><span class="tl-zh">开发者工具</span></span>
+    <span class="plat"><span class="tl-en">Multi-platform</span><span class="tl-zh">跨平台</span></span>
+    <a class="visit" href="https://github.com/Molunerfinn/PicGo" target="_blank" rel="noopener"><span class="tl-en">Visit ↗</span><span class="tl-zh">访问 ↗</span></a>
+  </div>
+</article>
+<article class="card" data-cat="games" data-plat="multi" data-price="paid" data-maker="Eric Barone">
+  <div class="card-head">
+    <span class="tile" aria-hidden="true">🌾</span>
+    <span class="badge b-paid"><span class="tl-en">Paid</span><span class="tl-zh">付费</span></span>
+  </div>
+  <h3 class="card-name">Stardew Valley</h3>
+  <p class="card-maker"><span class="tl-en">by </span><span class="tl-zh">作者 </span>Eric Barone</p>
+  <p class="card-tag"><span class="tl-en">The farming RPG one person spent 4+ years building — a solo-dev legend.</span><span class="tl-zh">一个人花四年多做出来的牧场经营 RPG，独立游戏传奇。</span></p>
+  <div class="card-foot">
+    <span class="chip"><span class="tl-en">Games</span><span class="tl-zh">游戏</span></span>
+    <span class="plat"><span class="tl-en">Multi-platform</span><span class="tl-zh">跨平台</span></span>
+    <a class="visit" href="https://www.stardewvalley.net" target="_blank" rel="noopener"><span class="tl-en">Visit ↗</span><span class="tl-zh">访问 ↗</span></a>
+  </div>
+</article>
+<article class="card" data-cat="games" data-plat="multi" data-price="paid" data-maker="LocalThunk">
+  <div class="card-head">
+    <span class="tile" aria-hidden="true">🃏</span>
+    <span class="badge b-paid"><span class="tl-en">Paid</span><span class="tl-zh">付费</span></span>
+  </div>
+  <h3 class="card-name">Balatro</h3>
+  <p class="card-maker"><span class="tl-en">by </span><span class="tl-zh">作者 </span>LocalThunk</p>
+  <p class="card-tag"><span class="tl-en">Poker-themed roguelike deckbuilder — the 2024 indie smash hit.</span><span class="tl-zh">扑克主题的肉鸽卡牌游戏，2024 年现象级独立爆款。</span></p>
+  <div class="card-foot">
+    <span class="chip"><span class="tl-en">Games</span><span class="tl-zh">游戏</span></span>
+    <span class="plat"><span class="tl-en">Multi-platform</span><span class="tl-zh">跨平台</span></span>
+    <a class="visit" href="https://playbalatro.com" target="_blank" rel="noopener"><span class="tl-en">Visit ↗</span><span class="tl-zh">访问 ↗</span></a>
+  </div>
+</article>
+<article class="card" data-cat="community" data-plat="web" data-price="paid" data-maker="Pieter Levels">
+  <div class="card-head">
+    <span class="tile" aria-hidden="true">🌍</span>
+    <span class="badge b-paid"><span class="tl-en">Paid</span><span class="tl-zh">付费</span></span>
+  </div>
+  <h3 class="card-name">Nomad List</h3>
+  <p class="card-maker"><span class="tl-en">by </span><span class="tl-zh">作者 </span>Pieter Levels</p>
+  <p class="card-tag"><span class="tl-en">The best places to live and work remotely, ranked by data.</span><span class="tl-zh">用数据评选全球最适合数字游民远程生活的城市。</span></p>
+  <div class="card-foot">
+    <span class="chip"><span class="tl-en">Community & Media</span><span class="tl-zh">社区与媒体</span></span>
+    <span class="plat"><span class="tl-en">Web</span><span class="tl-zh">网页</span></span>
+    <a class="visit" href="https://nomadlist.com" target="_blank" rel="noopener"><span class="tl-en">Visit ↗</span><span class="tl-zh">访问 ↗</span></a>
+  </div>
+</article>
+<article class="card" data-cat="community" data-plat="web" data-price="free" data-maker="Pieter Levels">
+  <div class="card-head">
+    <span class="tile" aria-hidden="true">💼</span>
+    <span class="badge b-free"><span class="tl-en">Free</span><span class="tl-zh">免费</span></span>
+  </div>
+  <h3 class="card-name">Remote OK</h3>
+  <p class="card-maker"><span class="tl-en">by </span><span class="tl-zh">作者 </span>Pieter Levels</p>
+  <p class="card-tag"><span class="tl-en">The largest remote jobs board, run with radical transparency.</span><span class="tl-zh">最大的远程工作招聘板，运营数据全公开。</span></p>
+  <div class="card-foot">
+    <span class="chip"><span class="tl-en">Community & Media</span><span class="tl-zh">社区与媒体</span></span>
+    <span class="plat"><span class="tl-en">Web</span><span class="tl-zh">网页</span></span>
+    <a class="visit" href="https://remoteok.com" target="_blank" rel="noopener"><span class="tl-en">Visit ↗</span><span class="tl-zh">访问 ↗</span></a>
+  </div>
+</article>
+<article class="card" data-cat="community" data-plat="web" data-price="free" data-maker="Livid">
+  <div class="card-head">
+    <span class="tile" aria-hidden="true">💬</span>
+    <span class="badge b-free"><span class="tl-en">Free</span><span class="tl-zh">免费</span></span>
+  </div>
+  <h3 class="card-name">V2EX</h3>
+  <p class="card-maker"><span class="tl-en">by </span><span class="tl-zh">作者 </span>Livid</p>
+  <p class="card-tag"><span class="tl-en">The community where Chinese creative workers share and build together.</span><span class="tl-zh">创意工作者社区：关于程序、设计、独立开发的每一次讨论。</span></p>
+  <div class="card-foot">
+    <span class="chip"><span class="tl-en">Community & Media</span><span class="tl-zh">社区与媒体</span></span>
+    <span class="plat"><span class="tl-en">Web</span><span class="tl-zh">网页</span></span>
+    <a class="visit" href="https://v2ex.com" target="_blank" rel="noopener"><span class="tl-en">Visit ↗</span><span class="tl-zh">访问 ↗</span></a>
+  </div>
+</article>
+<article class="card" data-cat="community" data-plat="web" data-price="free" data-maker="阮一峰">
+  <div class="card-head">
+    <span class="tile" aria-hidden="true">🗞️</span>
+    <span class="badge b-free"><span class="tl-en">Free</span><span class="tl-zh">免费</span></span>
+  </div>
+  <h3 class="card-name">科技爱好者周刊</h3>
+  <p class="card-maker"><span class="tl-en">by </span><span class="tl-zh">作者 </span>阮一峰</p>
+  <p class="card-tag"><span class="tl-en">China's most-followed tech weekly by Ruan Yifeng — every Friday, free.</span><span class="tl-zh">阮一峰主理的科技爱好者周刊：每周五更新，记录值得分享的技术与思考。</span></p>
+  <div class="card-foot">
+    <span class="chip"><span class="tl-en">Community & Media</span><span class="tl-zh">社区与媒体</span></span>
+    <span class="plat"><span class="tl-en">Web</span><span class="tl-zh">网页</span></span>
+    <a class="visit" href="https://www.ruanyifeng.com/blog/weekly" target="_blank" rel="noopener"><span class="tl-en">Visit ↗</span><span class="tl-zh">访问 ↗</span></a>
+  </div>
+</article>
+<article class="card" data-cat="community" data-plat="web" data-price="freemium" data-maker="Damon Chen">
+  <div class="card-head">
+    <span class="tile" aria-hidden="true">🪪</span>
+    <span class="badge b-freemium"><span class="tl-en">Freemium</span><span class="tl-zh">免费+付费</span></span>
+  </div>
+  <h3 class="card-name">Indie Page</h3>
+  <p class="card-maker"><span class="tl-en">by </span><span class="tl-zh">作者 </span>Damon Chen</p>
+  <p class="card-tag"><span class="tl-en">Your link-in-bio page for showing off everything you've shipped.</span><span class="tl-zh">独立开发者的个人主页：一次性展示你做过的所有产品。</span></p>
+  <div class="card-foot">
+    <span class="chip"><span class="tl-en">Community & Media</span><span class="tl-zh">社区与媒体</span></span>
+    <span class="plat"><span class="tl-en">Web</span><span class="tl-zh">网页</span></span>
+    <a class="visit" href="https://indiepa.ge" target="_blank" rel="noopener"><span class="tl-en">Visit ↗</span><span class="tl-zh">访问 ↗</span></a>
+  </div>
+</article>
+<!-- CARDS:END -->
+    </div>
+    <div class="empty" id="empty">
+      <p data-i18n="no_results">No products match. Try clearing the filters.</p>
+      <button class="btn btn-gho" id="resetBtn"><span data-i18n="reset_filters">Reset filters</span></button>
+    </div>
+  </div>
+</section>
+
+<section id="submit">
+  <div class="wrap">
+    <div class="panel">
+      <div>
+        <h2 data-i18n="submit_title">Submit your product</h2>
+        <p class="lead" data-i18n="submit_sub">Are you an independent developer? Getting listed is free, and submissions are reviewed by a human — usually within a few days.</p>
+        <h3 data-i18n="crit_title">What we look for</h3>
+        <ul class="crit">
+          <li data-i18n="crit1">Built by an independent developer or a team of 1–3 people</li>
+          <li data-i18n="crit2">A real, working product people can try today</li>
+          <li data-i18n="crit3">Original work — no affiliate spam or adult content</li>
+          <li data-i18n="crit4">Any pricing model is welcome: free, freemium, paid, or open source</li>
+        </ul>
+      </div>
+      <div>
+        <h3 data-i18n="how_title">How to submit</h3>
+        <p class="lead" data-i18n="how_sub">Click the button below — it opens your email app with a ready-made template. Fill in the blanks and hit send.</p>
+        <div class="mail">📮&nbsp;<span>tliens@163.com</span><small data-i18n="mail_small">The only official submission address.</small></div>
+        <div class="mbtns">
+          <a class="btn btn-pri" id="mailtoBtn" href="mailto:tliens@163.com"><span data-i18n="btn_template">Open email template</span></a>
+          <button class="btn btn-gho" id="copyBtn"><span data-i18n="btn_copy">Copy email address</span></button>
+        </div>
+        <p class="note" data-i18n="submit_note">If it fits, we'll email you back once it's live. You can also ask us to update or remove your listing at any time.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <h2 class="sec-title" data-i18n="faq_title">FAQ</h2>
+    <p class="sec-sub" data-i18n="faq_sub">Everything about getting listed.</p>
+    <details>
+      <summary><span data-i18n="q1">What counts as an independent developer product?</span></summary>
+      <p data-i18n="a1">Products built primarily by one to three people, self-funded and independent of big companies. Both full-time indie hackers and side-project builders are welcome.</p>
+    </details>
+    <details>
+      <summary><span data-i18n="q2">Does listing cost anything?</span></summary>
+      <p data-i18n="a2">No. Listing on Indie Gems is completely free — no paid placement, no affiliate links, and editorial order is not for sale.</p>
+    </details>
+    <details>
+      <summary><span data-i18n="q3">How do I submit my product?</span></summary>
+      <p data-i18n="a3">Email tliens@163.com with your product name, link, one-line intro, maker and pricing model. The “Open email template” button above fills this in for you. Most reviews take a few days.</p>
+    </details>
+    <details>
+      <summary><span data-i18n="q4">Can I update or remove my listing?</span></summary>
+      <p data-i18n="a4">Yes — email the same address with the change. We can update the description, link, or pricing, and honor removal requests at any time.</p>
+    </details>
+    <details>
+      <summary><span data-i18n="q5">How often is the directory updated?</span></summary>
+      <p data-i18n="a5">New listings are added as they're reviewed — roughly weekly. The product count and cards on the front page update with each release.</p>
+    </details>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span data-i18n="footer_note">Indie Gems is an independent curation project by Tliens. Product names and links belong to their respective makers.</span>
+    <span>© <b id="year">2026</b> Tliens · <a href="mailto:tliens@163.com">tliens@163.com</a></span>
+  </div>
+</footer>
+
+<script type="module">
+const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+
+/* ---------- i18n ---------- */
+const I18N = {
+en:{
+  docTitle:"Indie Gems — Hand-curated products by independent developers | 独立开发者作品收录",
+  docDesc:"A hand-curated, free directory of apps, games, dev tools and communities built by independent developers and small teams worldwide. Submit your own product for free.",
+  nav_products:"Products", nav_submit:"Submit", nav_faq:"FAQ",
+  hero_kick:"Hand-curated · Updated weekly",
+  hero_title_a:"Great products, made by ", hero_title_b:"independent developers",
+  hero_sub:"Indie Gems is a free, hand-curated directory of apps, games, dev tools and communities built by solo developers and small teams around the world. No big-company backing — just craft.",
+  stat_products:"Products", stat_makers:"Makers", stat_cost:"To get listed",
+  cta_browse:"Browse products", cta_submit:"Submit yours — free",
+  dir_title:"The directory", dir_sub:"Every entry is hand-picked. Order is editorial, not sponsored.",
+  search_ph:"Search products, makers…",
+  plat_all:"All platforms", plat_web:"Web", plat_ios:"iOS", plat_mac:"macOS", plat_multi:"Multi-platform",
+  price_all:"All pricing", price_free:"Free", price_freemium:"Freemium", price_paid:"Paid", price_oss:"Open Source",
+  cat_all:"All", cat_apps:"Apps & Tools", cat_creative:"Creative & Design", cat_dev:"Developer Tools", cat_games:"Games", cat_community:"Community & Media",
+  showing:"Showing {n} of {t} products",
+  no_results:"No products match. Try clearing the filters.", reset_filters:"Reset filters",
+  submit_title:"Submit your product",
+  submit_sub:"Are you an independent developer? Getting listed is free, and submissions are reviewed by a human — usually within a few days.",
+  crit_title:"What we look for",
+  crit1:"Built by an independent developer or a team of 1–3 people",
+  crit2:"A real, working product people can try today",
+  crit3:"Original work — no affiliate spam or adult content",
+  crit4:"Any pricing model is welcome: free, freemium, paid, or open source",
+  how_title:"How to submit",
+  how_sub:"Click the button below — it opens your email app with a ready-made template. Fill in the blanks and hit send.",
+  mail_small:"The only official submission address.",
+  btn_template:"Open email template", btn_copy:"Copy email address", copied:"Copied ✓",
+  submit_note:"If it fits, we'll email you back once it's live. You can also ask us to update or remove your listing at any time.",
+  faq_title:"FAQ", faq_sub:"Everything about getting listed.",
+  q1:"What counts as an independent developer product?",
+  a1:"Products built primarily by one to three people, self-funded and independent of big companies. Both full-time indie hackers and side-project builders are welcome.",
+  q2:"Does listing cost anything?",
+  a2:"No. Listing on Indie Gems is completely free — no paid placement, no affiliate links, and editorial order is not for sale.",
+  q3:"How do I submit my product?",
+  a3:"Email tliens@163.com with your product name, link, one-line intro, maker and pricing model. The “Open email template” button above fills this in for you. Most reviews take a few days.",
+  q4:"Can I update or remove my listing?",
+  a4:"Yes — email the same address with the change. We can update the description, link, or pricing, and honor removal requests at any time.",
+  q5:"How often is the directory updated?",
+  a5:"New listings are added as they're reviewed — roughly weekly. The product count and cards on the front page update with each release.",
+  footer_note:"Indie Gems is an independent curation project by Tliens. Product names and links belong to their respective makers.",
+  mSubject:"Submit my product — Indie Gems listing",
+  mBody:"Hi,\n\nI'd like to submit my product to Indie Gems.\n\n• Product name: \n• Link: \n• One-line intro: \n• Maker (X / GitHub): \n• Pricing: free / freemium / paid / open source\n\nThanks!\n"
+},
+zh:{
+  docTitle:"Indie Gems 独立佳作 — 独立开发者作品收录站 | Hand-curated indie products",
+  docDesc:"免费的人工精选目录：收录全球独立开发者与小团队打造的 App、游戏、开发工具和社区作品。开发者可免费申请收录自己的作品。",
+  nav_products:"作品目录", nav_submit:"申请收录", nav_faq:"常见问题",
+  hero_kick:"人工精选 · 每周更新",
+  hero_title_a:"这些好作品，来自", hero_title_b:"独立开发者",
+  hero_sub:"Indie Gems 是一个免费的人工精选目录，收录全球 solo 开发者与小团队打造的应用、游戏、开发工具和社区。没有大厂背景，只有用心打磨的作品。",
+  stat_products:"收录作品", stat_makers:"位开发者", stat_cost:"收录费用",
+  cta_browse:"浏览作品", cta_submit:"免费申请收录",
+  dir_title:"作品目录", dir_sub:"每个条目均为人工精选，排序是编辑观点，不含赞助位。",
+  search_ph:"搜索作品、开发者…",
+  plat_all:"全部平台", plat_web:"网页", plat_ios:"iOS", plat_mac:"macOS", plat_multi:"跨平台",
+  price_all:"全部收费模式", price_free:"免费", price_freemium:"免费+付费", price_paid:"付费", price_oss:"开源",
+  cat_all:"全部", cat_apps:"应用与工具", cat_creative:"创作与设计", cat_dev:"开发者工具", cat_games:"游戏", cat_community:"社区与媒体",
+  showing:"共 {t} 个作品，当前显示 {n} 个",
+  no_results:"没有符合条件的作品，试试清空筛选。", reset_filters:"重置筛选",
+  submit_title:"申请收录你的作品",
+  submit_sub:"你是独立开发者吗？收录完全免费，每份申请都由站长亲自审核，通常几天内回复。",
+  crit_title:"收录标准",
+  crit1:"由独立开发者或 1–3 人小团队打造",
+  crit2:"真实可用的作品，今天就能上手体验",
+  crit3:"原创作品——不接受导购垃圾站与成人内容",
+  crit4:"收费模式不限：免费、免费+付费、付费或开源均可",
+  how_title:"提交方式",
+  how_sub:"点击下方按钮，会用你的邮件 App 打开一份现成模板，填空后发送即可。",
+  mail_small:"这是唯一官方收录邮箱，请认准。",
+  btn_template:"打开邮件模板", btn_copy:"复制邮箱地址", copied:"已复制 ✓",
+  submit_note:"审核通过上线后会邮件告知你。收录信息需要更新或想下架，随时来信。",
+  faq_title:"常见问题", faq_sub:"关于收录的一切。",
+  q1:"什么样的作品算「独立开发者作品」？",
+  a1:"主要由 1–3 人开发、自筹资金、不隶属大公司的产品。全职独立开发者与业余做副业项目的人都欢迎。",
+  q2:"收录收费吗？",
+  a2:"不收费。Indie Gems 的收录完全免费——没有付费位、没有导购链接，排序也不出售。",
+  q3:"怎么提交我的作品？",
+  a3:"发邮件到 tliens@163.com，附上作品名、链接、一句话介绍、作者和收费模式。页面上方的「打开邮件模板」按钮会帮你写好格式，通常几天内审核完。",
+  q4:"收录信息可以更新或删除吗？",
+  a4:"可以——向同一邮箱说明改动即可。简介、链接、收费模式都可以更新，也可以随时申请下架。",
+  q5:"目录多久更新一次？",
+  a5:"审核通过即上线，大约每周一批。首页的作品数量与卡片会随每次更新变化。",
+  footer_note:"Indie Gems 是 Tliens 运营的独立精选项目。作品名称与链接归各自开发者所有。",
+  mSubject:"收录申请 — Indie Gems 独立开发者作品",
+  mBody:"你好，\n\n我想申请将我的作品收录到 Indie Gems：\n\n• 作品名：\n• 链接：\n• 一句话介绍：\n• 作者（可附 X / GitHub）：\n• 收费模式：免费 / 免费+付费 / 付费 / 开源\n\n谢谢！\n"
+}};
+let lang = 'en';
+const t = k => (I18N[lang] && I18N[lang][k]) ?? I18N.en[k] ?? k;
+
+/* ---------- theme ---------- */
+const mq = window.matchMedia('(prefers-color-scheme: dark)');
+const THEME_ICON = {auto:'🖥️', light:'☀️', dark:'🌙'};
+let theme = localStorage.getItem('ig_theme') || 'auto';
+function applyTheme(){
+  const eff = theme === 'auto' ? (mq.matches ? 'dark' : 'light') : theme;
+  document.documentElement.dataset.theme = eff;
+  $('#themeBtn').textContent = THEME_ICON[theme];
+}
+$('#themeBtn').onclick = () => {
+  theme = theme === 'auto' ? 'light' : theme === 'light' ? 'dark' : 'auto';
+  localStorage.setItem('ig_theme', theme);
+  applyTheme();
+};
+mq.addEventListener('change', applyTheme);
+
+/* ---------- filters ---------- */
+const cards = $$('#grid .card');
+const state = {q:'', cat:'all', plat:'all', price:'all'};
+function applyFilters(){
+  let n = 0;
+  const q = state.q.trim().toLowerCase();
+  for (const c of cards){
+    const ok = (state.cat === 'all' || c.dataset.cat === state.cat)
+      && (state.plat === 'all' || (c.dataset.plat || '').split(' ').includes(state.plat))
+      && (state.price === 'all' || c.dataset.price === state.price)
+      && (!q || c.textContent.toLowerCase().includes(q));
+    c.classList.toggle('hidden', !ok);
+    if (ok) n++;
+  }
+  $('#count').textContent = t('showing').replace('{n}', n).replace('{t}', cards.length);
+  $('#empty').classList.toggle('show', n === 0);
+}
+$('#q').addEventListener('input', e => { state.q = e.target.value; applyFilters(); });
+$('#fPlat').addEventListener('change', e => { state.plat = e.target.value; applyFilters(); });
+$('#fPrice').addEventListener('change', e => { state.price = e.target.value; applyFilters(); });
+$('#chips').addEventListener('click', e => {
+  const b = e.target.closest('button[data-cat]');
+  if (!b) return;
+  state.cat = b.dataset.cat;
+  $$('#chips button').forEach(x => x.classList.toggle('on', x === b));
+  syncURL();
+  applyFilters();
+});
+$('#resetBtn').onclick = () => {
+  state.q = ''; state.plat = 'all'; state.price = 'all'; state.cat = 'all';
+  $('#q').value = ''; $('#fPlat').value = 'all'; $('#fPrice').value = 'all';
+  $$('#chips button').forEach(x => x.classList.toggle('on', x.dataset.cat === 'all'));
+  syncURL();
+  applyFilters();
+};
+
+/* ---------- mailto ---------- */
+function buildMailto(){
+  const s = encodeURIComponent(t('mSubject'));
+  const b = encodeURIComponent(t('mBody'));
+  $('#mailtoBtn').href = `mailto:tliens@163.com?subject=${s}&body=${b}`;
+}
+$('#copyBtn').onclick = async () => {
+  const btn = $('#copyBtn'), label = btn.firstElementChild;
+  try{ await navigator.clipboard.writeText('tliens@163.com'); }
+  catch(e){
+    const ta = document.createElement('textarea');
+    ta.value = 'tliens@163.com'; document.body.appendChild(ta); ta.select();
+    try{ document.execCommand('copy'); }catch(_){}
+    ta.remove();
+  }
+  label.textContent = t('copied');
+  setTimeout(() => { label.textContent = lang === 'zh' ? '复制邮箱地址' : 'Copy email address'; }, 1500);
+};
+
+/* ---------- language ---------- */
+function applyLang(l, push){
+  lang = l;
+  document.documentElement.lang = l === 'zh' ? 'zh-CN' : 'en';
+  document.documentElement.classList.toggle('lang-zh', l === 'zh');
+  for (const el of $$('[data-i18n]')) el.textContent = t(el.dataset.i18n);
+  for (const el of $$('[data-i18n-ph]')) el.placeholder = t(el.dataset.i18nPh);
+  document.title = t('docTitle');
+  for (const [sel, key, short] of [['meta[name="description"]','docDesc',false],['meta[property="og:title"]','docTitle',true],['meta[property="og:description"]','docDesc',false],['meta[name="twitter:title"]','docTitle',true],['meta[name="twitter:description"]','docDesc',false]]){
+    const m = $(sel); if (m) m.content = short ? t(key).split(' | ')[0] : t(key);
+  }
+  const langBtn = $('#langBtn');
+  langBtn.textContent = l === 'zh' ? 'EN' : '中文';
+  applyFilters();
+  buildMailto();
+  localStorage.setItem('ig_lang', l);
+  if (push) syncURL();
+}
+$('#langBtn').onclick = () => applyLang(lang === 'zh' ? 'en' : 'zh', true);
+
+/* ---------- url sync ---------- */
+function syncURL(){
+  const p = new URLSearchParams();
+  if (lang !== 'en') p.set('lang', lang);
+  if (state.cat !== 'all') p.set('c', state.cat);
+  const qs = p.toString();
+  history.replaceState(null, '', qs ? `?${qs}${location.hash}` : location.pathname.replace(/index\.html$/, '') + location.hash);
+}
+
+/* ---------- init ---------- */
+const makers = new Set(cards.map(c => c.dataset.maker).filter(Boolean));
+$('#statProducts').textContent = cards.length;
+$('#statMakers').textContent = makers.size;
+$('#year').textContent = new Date().getFullYear();
+
+const params = new URLSearchParams(location.search);
+const catParam = params.get('c');
+if (catParam && document.querySelector(`#chips button[data-cat="${CSS.escape(catParam)}"]`)){
+  state.cat = catParam;
+  $$('#chips button').forEach(x => x.classList.toggle('on', x.dataset.cat === catParam));
+}
+
+const langParam = params.get('lang');
+const saved = localStorage.getItem('ig_lang');
+const initial = (langParam === 'zh' || langParam === 'en') ? langParam
+  : saved === 'zh' || saved === 'en' ? saved
+  : (navigator.language || '').toLowerCase().startsWith('zh') ? 'zh' : 'en';
+
+applyTheme();
+applyLang(initial, false);
+if (langParam || catParam) syncURL();
+</script>
+</body>
+</html>

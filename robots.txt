@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://tliens.github.io/indie-gems/sitemap.xml
+Sitemap: https://indie-gems.kuige.me/sitemap.xml

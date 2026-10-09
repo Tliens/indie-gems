@@ -9,7 +9,8 @@
 <link rel="alternate" hreflang="en" href="https://indie-gems.kuige.me/">
 <link rel="alternate" hreflang="zh" href="https://indie-gems.kuige.me/?lang=zh">
 <link rel="alternate" hreflang="x-default" href="https://indie-gems.kuige.me/">
-<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="icon" type="image/png" href="favicon.png?v=2">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=2">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Indie Gems 独立作品收录">
 <meta property="og:title" content="Indie Gems — Products made by independent developers">
@@ -68,15 +69,7 @@ html.lang-zh .tl-en{display:none}
 html:not(.lang-zh) .tl-zh{display:none}
 a{color:inherit}
 .wrap{max-width:1100px;margin:0 auto;padding:0 20px}
-/* header */
-header{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
-.hd{display:flex;align-items:center;gap:14px;height:60px}
-.brand{display:flex;align-items:center;gap:9px;font-weight:800;font-size:18px;text-decoration:none;letter-spacing:-.2px}
-.brand .gem{font-size:21px}
-nav.main{display:flex;gap:4px;margin-left:6px}
-nav.main a{padding:7px 11px;border-radius:9px;text-decoration:none;color:var(--muted);font-size:14.5px;font-weight:500}
-nav.main a:hover{color:var(--text);background:var(--accent-soft)}
-.hd-ctl{margin-left:auto;display:flex;gap:8px;align-items:center}
+/* header buttons */
 .ctl{border:1px solid var(--line);background:var(--card);color:var(--text);border-radius:9px;padding:6px 11px;font-size:13.5px;font-weight:600;cursor:pointer;font-family:inherit}
 .ctl:hover{border-color:var(--accent)}
 /* hero */
@@ -159,32 +152,49 @@ summary::after{content:"+";font-size:20px;color:var(--muted);font-weight:400;tra
 details[open] summary::after{transform:rotate(45deg)}
 details p{color:var(--muted);font-size:14.5px;padding:0 4px 18px;max-width:680px}
 /* footer */
-footer{border-top:1px solid var(--line);margin-top:30px;padding:30px 0 40px;color:var(--muted);font-size:13.5px}
-footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center}
-footer a{color:var(--accent);text-decoration:none}
-footer a:hover{text-decoration:underline}
 @media(max-width:760px){
-  nav.main{display:none}
   .panel{grid-template-columns:1fr;padding:26px}
   .hero{padding:52px 0 24px}
   .stats{gap:26px}
 }
+/* ── KuiGe 站群统一基座 ───────────────────── */
+:root{--kg-ink:#1f2430;--kg-sub:#6b7280;--kg-accent:#f2603c;--kg-line:#e8e6e1;--kg-bg:#faf9f7}
+.kg-top{position:sticky;top:0;z-index:60;background:rgba(250,249,247,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--kg-line)}
+.kg-top-in{max-width:1120px;margin:0 auto;padding:10px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.kg-brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--kg-ink);font-weight:700;font-size:17px}
+.kg-brand img{width:32px;height:32px;border-radius:9px;display:block}
+.kg-brand small{font-weight:500;color:var(--kg-sub);font-size:12px}
+.kg-nav{display:flex;align-items:center;gap:14px;font-size:14px}
+.kg-nav a{color:var(--kg-sub);text-decoration:none}
+.kg-nav a:hover{color:var(--kg-ink)}
+.kg-entry{background:var(--kg-ink);color:#fff!important;padding:6px 14px;border-radius:999px;text-decoration:none;font-size:13px}
+.kg-entry:hover{background:var(--kg-accent)}
+.kg-foot{background:var(--kg-bg);border-top:1px solid var(--kg-line);color:var(--kg-sub);font-size:13px;margin-top:0}
+.kg-foot-in{max-width:1120px;margin:0 auto;padding:36px 20px 28px;display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center}
+.kg-foot img{width:44px;height:44px;border-radius:12px;margin-bottom:2px}
+.kg-foot-brand{color:var(--kg-ink);font-weight:700;font-size:15px;margin:0}
+.kg-foot-links{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 18px}
+.kg-foot-links a{color:var(--kg-sub);text-decoration:none}
+.kg-foot-links a:hover{color:var(--kg-accent)}
+.kg-foot-copy{margin:4px 0 0;color:#9ca3af;font-size:12px}
+@media(max-width:640px){.kg-nav a:not(.kg-entry){display:none}}
 </style>
 </head>
 <body>
-<header>
-  <div class="wrap hd">
-    <a class="brand" href="#"><span class="gem">💎</span>Indie Gems</a>
-    <nav class="main">
+<header class="kg-top">
+  <div class="kg-top-in">
+    <a class="kg-brand" href="./">
+      <img src="favicon.png?v=2" alt="Indie Gems 吉祥物">
+      <span>Indie Gems<small>独立开发者作品收录</small></span>
+    </a>
+    <nav class="kg-nav">
       <a href="#products"><span data-i18n="nav_products">Products</span></a>
       <a href="#submit"><span data-i18n="nav_submit">Submit</span></a>
       <a href="#faq"><span data-i18n="nav_faq">FAQ</span></a>
-      <a class="None kuige-entry" href="https://kuige.me/" target="_blank" rel="noopener" title="kuige.me" style="text-decoration:none"><img src="https://kuige.me/logo.png" alt="" width="16" height="16" style="width:16px;height:16px;border-radius:50%;vertical-align:-3px;margin-right:6px">魁歌</a>
-    </nav>
-    <div class="hd-ctl">
       <button class="ctl" id="themeBtn" aria-label="Toggle theme">🖥️</button>
       <button class="ctl" id="langBtn">中文</button>
-    </div>
+      <a class="kg-entry" href="https://kuige.me/" target="_blank" rel="noopener">魁歌 · 全部作品</a>
+    </nav>
   </div>
 </header>
 
@@ -648,10 +658,19 @@ footer a:hover{text-decoration:underline}
   </div>
 </section>
 
-<footer>
-  <div class="wrap">
-    <span data-i18n="footer_note">Indie Gems is an independent curation project by Tliens. Product names and links belong to their respective makers.</span>
-    <span>© <b id="year">2026</b> Tliens · <a href="mailto:tliens@163.com">tliens@163.com</a></span>
+<footer class="kg-foot">
+  <div class="kg-foot-in">
+    <img src="favicon.png?v=2" alt="Indie Gems 吉祥物">
+    <p class="kg-foot-brand">Indie Gems</p>
+    <nav class="kg-foot-links">
+      <a href="https://kuige.me/" target="_blank" rel="noopener">魁歌主页</a>
+      <a href="https://collagemill.kuige.me/" target="_blank" rel="noopener">CollageMill 图片排版</a>
+      <a href="https://rednote-formatter.kuige.me/" target="_blank" rel="noopener">Rednote Formatter 文案排版</a>
+      <a href="https://stream-inspector.kuige.me/" target="_blank" rel="noopener">Stream Inspector 直播拉流</a>
+      <a href="mailto:tliens@163.com">tliens@163.com</a>
+    </nav>
+    <p data-i18n="footer_note" style="margin:0;max-width:560px">Indie Gems is an independent curation project by Tliens. Product names and links belong to their respective makers.</p>
+    <p class="kg-foot-copy">© <span id="year">2026</span> Tliens · 魁歌 KuiGe · 用 AI 构建 · <a href="https://kuige.me/" style="color:inherit">kuige.me</a></p>
   </div>
 </footer>
 
